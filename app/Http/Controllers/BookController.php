@@ -21,6 +21,7 @@ class BookController extends Controller
                 ->allowedSorts(['name'])
                 ->defaultSort('name')
                 ->paginate()
+                ->setPath('/api/books')
         );
     }
 
