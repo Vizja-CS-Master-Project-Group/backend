@@ -43,6 +43,7 @@ EXPOSE 9000
 
 # Fix permissions
 RUN chown -R www-data:www-data /var/www
+RUN chmod -R 777 storage/logs
 
 # Set working directory
 WORKDIR /var/www/html
