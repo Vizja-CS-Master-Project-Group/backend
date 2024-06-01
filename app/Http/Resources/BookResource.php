@@ -23,14 +23,19 @@ class BookResource extends JsonResource
         $cover = $this->getFirstMedia('cover');
 
         return [
-            'id' => $this->id,
+            'id' => $this->getKey(),
             'name' => $this->name,
             'language' => $this->language,
             'subject' => $this->subject,
             'page_count' => $this->page_count,
             'original' => !!$this->original,
             'allow_loan' => !!$this->barrowable,
-            'cover' => $cover->getFullUrl()
+            'cover' => $cover?->getFullUrl(),
+            'author' => [
+                'id' => $this->author->getKey(),
+                'name' => $this->author->name,
+                'lastname' => $this->author->lastname,
+            ]
         ];
     }
 }
