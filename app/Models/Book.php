@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\IsbnHelper;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,7 +35,19 @@ class Book extends Model implements HasMedia
 
     use HasFactory, SoftDeletes, InteractsWithMedia;
 
+    protected $attributes = [
+        'original' => false,
+        'barrowable' => false
+    ];
+
     protected static $unguarded = true;
+
+    protected static function booted()
+    {
+        static::creating(function (Book $book) {
+            $book->isbn = IsbnHelper::generateIsbn13();
+        });
+    }
 
     public function author()
     {

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBookRequest;
 use App\Http\Resources\BookResource;
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\Publisher;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -25,35 +28,40 @@ class BookController extends Controller
         );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function store(StoreBookRequest $request)
     {
-        //
+        $newBook = Book::query()->create($request->validated());
+        return BookResource::make($newBook);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Book $book)
     {
         return BookResource::make($book);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Book $book)
+    public function update(StoreBookRequest $request, Book $book)
     {
-        //
+        $book->update($request->validated());
+
+        return BookResource::make($book);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return [
+            'data' => [
+                'message' => 'Book deleted successfully',
+            ]
+        ];
+    }
+
+    public function schema()
+    {
+        return [
+            'authors' => Author::all()->pluck('name', 'id'),
+            'publishers' => Publisher::all()->pluck('name', 'id'),
+        ];
     }
 }
