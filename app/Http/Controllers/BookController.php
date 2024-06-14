@@ -12,9 +12,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class BookController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         return BookResource::collection(
