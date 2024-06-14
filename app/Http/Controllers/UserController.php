@@ -16,8 +16,8 @@ class UserController extends Controller
     {
         return UserResource::collection(
             QueryBuilder::for(User::class)
-                ->allowedSorts(['name'])
-                ->defaultSort('name')
+                ->allowedSorts(['id', 'name', 'lastname', 'email'])
+                ->defaultSort('-id')
                 ->paginate()
                 ->setPath('')
         );
