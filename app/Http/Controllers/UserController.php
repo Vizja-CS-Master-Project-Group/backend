@@ -59,7 +59,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return $this->schema();
+        return UserResource::make($user)->additional([
+            'schema' => $this->schema()
+        ]);
     }
 
     /**
@@ -67,7 +69,9 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->update($request->validated());
+
+        return UserResource::make($user);
     }
 
     /**
@@ -75,6 +79,14 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if (auth()->user()->role === 'user') {
+            return [
+                'data' => [
+                    'message' => 'You dont have permission for this action.'
+                ]
+            ];
+        }
+
         $user->delete();
 
         return [

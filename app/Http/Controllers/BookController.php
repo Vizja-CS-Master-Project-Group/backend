@@ -7,6 +7,7 @@ use App\Http\Resources\BookResource;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Publisher;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -25,6 +26,13 @@ class BookController extends Controller
         );
     }
 
+    public function create()
+    {
+        return [
+            'schema' => $this->schema(),
+        ];
+    }
+
     public function store(StoreBookRequest $request)
     {
         $newBook = Book::query()->create($request->validated());
@@ -34,6 +42,26 @@ class BookController extends Controller
     public function show(Book $book)
     {
         return BookResource::make($book);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Book $book)
+    {
+        return [
+            'data' => [
+                'name' => $book->name,
+                'language' => $book->language,
+                'subject' => $book->subject,
+                'author_id' => (string)$book->author_id,
+                'publisher_id' => (string)$book->publisher_id,
+                'page_count' => (string)$book->page_count,
+                'original' => $book->original,
+                'barrowable' => $book->barrowable,
+            ],
+            'schema' => $this->schema()
+        ];
     }
 
     public function update(StoreBookRequest $request, Book $book)
@@ -54,7 +82,7 @@ class BookController extends Controller
         ];
     }
 
-    public function schema()
+    protected function schema()
     {
         return [
             'authors' => Author::all()->pluck('name', 'id'),
