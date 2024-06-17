@@ -12,6 +12,12 @@ Route::resource('/users', \App\Http\Controllers\UserController::class)
 Route::resource('/loans', \App\Http\Controllers\LoanController::class)
     ->middleware(['auth:sanctum']);
 
+Route::get('/settings', [\App\Http\Controllers\SettingController::class, 'index'])
+    ->middleware(['auth:sanctum']);
+
+Route::put('/settings', [\App\Http\Controllers\SettingController::class, 'update'])
+    ->middleware(['auth:sanctum']);
+
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });

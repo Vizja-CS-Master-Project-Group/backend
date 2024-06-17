@@ -84,7 +84,8 @@ class LoanController extends Controller
 
     public function update(Request $request, Loan $loan)
     {
-        //
+        $loan = app(BookLoanService::class)->return($loan);
+        return LoanResource::make($loan);
     }
 
     public function destroy(Loan $loan)
