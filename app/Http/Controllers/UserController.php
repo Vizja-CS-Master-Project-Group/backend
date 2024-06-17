@@ -101,7 +101,6 @@ class UserController extends Controller
     protected function schema() {
         return [
             'roles' => [
-                'admin',
                 'librarian',
                 'user'
             ],
