@@ -82,6 +82,7 @@ class UserController extends Controller
         if (auth()->user()->role === 'user') {
             return [
                 'data' => [
+                    'variant' => 'success',
                     'message' => 'You dont have permission for this action.'
                 ]
             ];
@@ -91,6 +92,7 @@ class UserController extends Controller
 
         return [
             'data' => [
+                'variant' => 'success',
                 'message' => 'User deleted successfully',
             ]
         ];

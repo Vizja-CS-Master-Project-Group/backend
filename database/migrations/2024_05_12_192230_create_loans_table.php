@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreignId('book_id');
 
             $table->dateTime('barrow_at');
-            $table->dateTime('returned_at');
-            $table->string('total_fee');
+            $table->dateTime('returned_at')->nullable();
+            $table->string('fee')->nullable();
 
             $table->timestamps();
             $table->softDeletes();

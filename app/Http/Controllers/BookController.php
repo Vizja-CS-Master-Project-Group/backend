@@ -77,6 +77,7 @@ class BookController extends Controller
 
         return [
             'data' => [
+                'variant' => 'error',
                 'message' => 'Book deleted successfully',
             ]
         ];
