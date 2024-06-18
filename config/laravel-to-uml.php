@@ -5,10 +5,10 @@ return [
      * Default route to see the UML diagram.
      */
     'route' => '/uml',
-    
+
     /**
      * You can turn on or off the indexing of specific types
-     * of classes. By default, LTU processes only controllers 
+     * of classes. By default, LTU processes only controllers
      * and models.
      */
     'casts'         => false,
@@ -23,8 +23,8 @@ return [
     'mails'         => false,
     'middlewares'   => false,
     'models'        => true,
-    'notifications' => false,
-    'observers'     => false,
+    'notifications' => true,
+    'observers'     => true,
     'policies'      => false,
     'providers'     => false,
     'requests'      => true,
@@ -53,7 +53,7 @@ return [
         'lineWidth'  => 3,
         'padding'    => 8,
         'spacing'    => 40,
-        'title'      => 'Filename',
+        'title'      => 'LibraryProjectUML',
         'zoom'       => 1,
         'acyclicer'  => 'greedy',
         'ranker'     => 'longest-path'
