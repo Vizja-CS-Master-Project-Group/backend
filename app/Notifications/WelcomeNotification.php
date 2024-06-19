@@ -36,7 +36,7 @@ class WelcomeNotification extends Notification
         return (new MailMessage)
             ->subject('Welcome to the Library')
             ->line('Welcome to the Library.')
-            ->line('Your passport is: ' . $this->password);
+            ->line('Your password is: ' . $this->password);
     }
 
     /**
